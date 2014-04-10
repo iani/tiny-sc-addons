@@ -12,8 +12,7 @@ Added: Tue, Apr  8 2014, 11:18 EEST
 */
 //Requires KDTree Quark, GaussTrig and wslib [and scmir…]
 
-(
-//-simple granular synth[substitute Impulse for GaussTrig if you don't have GaussTrig]
+//: -simple granular synth[substitute Impulse for GaussTrig if you don't have GaussTrig]
 
 SynthDef(\grains,{|out,buf,pos,dur=0.5,rate=500,offset=1,gate=1,pch=1,amp=1|
 	var son,trig;
@@ -68,16 +67,19 @@ SynthDef(\grains2,{|out,buf,pos,dur=0.5,rate=500,offset=1,gate=1,pch=1,amp=1|
 			event.frames = analysis.featuredata.clump(n);	
 	"Processing Finished...analysis ready for use.".postln;	
 	event;}
-})
+};
 
-
-
-//-run analysis function [path,auto-segment]
+//: -run analysis function [path,auto-segment]
+//: Original: 
 ~data = ~load.("/sounds/prepared_guitar.wav",false)
+//:
 ~data
 
-//!main
-(
+//: tiny version (choose path interactively with dialog window): 
+PathDo({ | path | ~data = ~load.(path, false) });
+
+//: !main
+
 var w,but,f,width,isPlaying={false}!x.size,osc,height;
 var plot;
 
@@ -93,7 +95,10 @@ plot = {|w,buf,frames,segments,beatdata|
 	//grains = Synth(\grains,[\buf,buf,\dur,2,\rate,35,\pos,0,\amp,0,\offset,0.45]);
 
 	//variation
-	grains = Synth(\grains2,[\buf,buf,\dur,0.2,\rate,5,\pos,0,\amp,0.5,\offset,0.9]);
+	// Original NC:
+	// grains = Synth(\grains2,[\buf,buf,\dur,0.2,\rate,5,\pos,0,\amp,0.5,\offset,0.9]);
+	// Louder:
+	grains = Synth(\grains2,[\buf,buf,\dur,0.2,\rate,5,\pos,0,\amp,2.5,\offset,0.9]);
 
 
 	width = w.bounds.width*0.75;
@@ -156,7 +161,7 @@ w = Window("Scatter",Rect(250,250,1200,800)).front;
 w.view.background_(Color.black);
 plot.(w,~data.buf,~data.frames,~data.segments,~data.beatdata);
 
-)
+//: 
 
 //-might need to call this periodiocally
 Buffer.freeAll
