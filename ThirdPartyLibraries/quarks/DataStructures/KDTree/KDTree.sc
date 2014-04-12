@@ -46,7 +46,7 @@ init { |array, dep=0, par, lastIsLabel=false, uid=1|
 	rightChild = if(medianPos==(array.size-1), nil, { KDTree.new(sorted[medianPos+1..], depth+1, this, lastIsLabel, uniqueid << 1 | 1)});
 }
 
-nearest { |point, nearestSoFar, bestDist=inf, incExact=true|
+ nearest { |point, nearestSoFar, bestDist=inf, incExact=true|
 	^this.kNearest(point, 1, nearestSoFar, bestDist, incExact)
 }
 kNearest { |point, k, nearestSoFar, bestDist=inf, incExact=true|

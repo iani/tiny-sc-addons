@@ -17,7 +17,7 @@ PanOut {
 				Out.ar(  ( (bus+1).round(2) - 1).wrap(0,wrap), in[1] ) ]  };
 		}
 	
-	*ar { |bus = 0, channel, wrap| 
+	*ar { | bus = 0, channel, wrap| 
 		^this.switchBus( bus, this.pan( channel, bus ), wrap ); }
 	
 	}
