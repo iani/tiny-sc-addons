@@ -263,30 +263,36 @@ SynthDef(\handclapsmash2,{|out= 0 amp = 0.1 gate=1 cutoff= 12000 cutoff2=10000 r
 	Out.ar(out,Pan2.ar(filter*env*amp,pan));
 
 }),
-SynthDef(\bassfoundation,{|out= 0 freq = 440 amp = 0.1 gate=1 cutoff= 1000 rq=0.5 pan=0.0|
+	SynthDef(\bassfoundation,{|out= 0 freq = 440 amp = 0.1 gate=1 /*cutoff= 1000 */
+			rq=0.5 pan=0.0|
 
 	var osc, filter, env, filterenv;
 
 	osc = Saw.ar(freq);
 
 	filterenv = EnvGen.ar(Env.adsr(0.0,0.5,0.2,0.2),gate,doneAction:2);
-	filter =  RLPF.ar(osc,cutoff*filterenv+100,rq);
+	filter =  RLPF.ar(osc, \cutoff.cr(\freq) * filterenv + 100, rq);
 
 	env = EnvGen.ar(Env.adsr(0.01,0.0,0.9,0.05),gate,doneAction:2);
 
 	Out.ar(out,Pan2.ar(filter*env*amp*2,pan));
 
 }),
-SynthDef(\basshighend,{|out= 0 freq = 440 amp = 0.1 gate=1 cutoff= 3000 rq=0.1 drive = 2.0 pan=0.0|
+SynthDef(\basshighend, { 
+	| out = 0 freq = 440 amp = 0.1 gate = 1 /* cutoff = 3000 */
+	rq = 0.1 /* drive = 2.0 */ pan = 0.0 |
 
 	var osc, filter, env, filterenv;
-	var ab;
+	var ab, drive, cutoff;
+
+	drive = \drive.cr([0, 10, 'linear', 0, 2]);
+	cutoff = \cutoff.cr(\freq);
 
 	//osc = Mix(VarSaw.ar(freq*[0.25,1,1.5],Rand(0.0,1.0)!3,0.9,[0.5,0.4,0.1]));
 	osc = Mix(Saw.ar(freq*[0.25,1,1.5],[0.5,0.4,0.1]));
 	//osc = Mix(DPW4Saw.ar(freq*[0.25,1,1.5],[0.5,0.4,0.1]));
 	filterenv = EnvGen.ar(Env.adsr(0.0,0.5,0.2,0.2),gate,doneAction:2);
-	filter =  RLPF.ar(osc,cutoff*filterenv+100,rq);
+	filter =  RLPF.ar(osc, cutoff * filterenv + 100, rq);
 
  	//distortion
  	//filter = filter.distort.softclip;
