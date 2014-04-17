@@ -12,7 +12,7 @@ Copied: Mon, Apr 14 2014, 00:31 EEST
 	cs = [Select,Stepper,RLPF,LFTri,Pulse,PulseDivider,Lag2,Lag,EnvGen,
 		Saw, LPF, PitchShift, AllpassN, Env, LocalIn, LocalOut, Impulse ];
 	var fa,ffa, ra, eca, era, fsa, xc, fxc, rq, ec, er,xcs, o,e;
-	mp = {… |n,alk| alk = alk ? lk;                      
+	mp = { |n,alk| alk = alk ? lk;                      
 		{midicps(jx .choose * 12 + lk.choose) } !n };   
 	faz = [ mp.(3)* 2.midiratio, mp.( 3 )
 		*1. midiratio, mp.( 2,[ 0,3,9 ])*5.midiratio,mp.(1 )*1.midiratio ]; 
