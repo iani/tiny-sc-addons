@@ -14,6 +14,30 @@
 50 => ~hi;
 0.14 => ~form1;
 1/89 => ~form2;
+//: patterns!
+(stepper: (0.1, 0.2..5).pseq, dur: 1) *> \gardellino;
+
+(stepper: (0.1, 0.2..5).pseq, lo: Pwhite(10, 100, inf), dur: 1) *> \gardellino
+
+//:
+(stepper: (0.1, 0.2..5).pseq, 
+lo: Pwhite(10, 100, inf), 
+hi: Pwhite(100, 1000, inf), 
+dur: 1) *> \gardellino
+//:
+(stepper: (0.1, 0.2..5).pseq, 
+lo: Pwhite(10, 100, inf), 
+hi: Pwhite(100, 1000, inf), 
+dur: 0.1) *> \gardellino
+//:
+(stepper: (0.1, 0.2..5).pseq, 
+lo: Pwhite(10, 100, inf), 
+hi: Pwhite(100, 1000, inf), 
+form1: Pbrown(0.01, 0.5, 0.1, inf),
+form2: Pbrown(1/99, 1/10, 0.01, inf),
+dur: 3) *> \gardellino
+//:
+
 //:
 `\boombah => \boombah;
 //:
@@ -26,6 +50,9 @@
 7 => ~d4;
 12 => ~d4;
 
+
+
+
 //:
 `\mysterymetals => \mysterymetals;
 3 => ~pulse;
@@ -36,3 +63,7 @@
 (pulse: (1..10).pseq, dur: 1, spulse: (100, 200..2000).pseq) *> \mysterymetals;
 
 (pulse: { 0.1 exprand: 10 }.pfunc, dur: 1, spulse: (100, 200..2000).pseq) *> \mysterymetals;
+
+\mysterymetals fadeOut: 10;
+
+\mysterymetals.asSynthTree.start;
