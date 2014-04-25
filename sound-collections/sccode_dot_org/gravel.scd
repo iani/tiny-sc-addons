@@ -20,6 +20,10 @@ SynthDef(\Grain,
 		pan2 = Pan4.ar(grain, FSinOsc.kr(0.07,(pi * 2)), FSinOsc.kr(0.07,(pi * 1.5)));
 		Out.ar(0, pan1+pan2*0.0007);
 }).add;
+)
+
+//:
+
 (
 SynthDef(\Verb,
 	{var comb;
@@ -28,8 +32,9 @@ SynthDef(\Verb,
 		Out.ar(0,comb);
 }).add;
 );
-)
-)
+
+//:
+
 
 (
 (

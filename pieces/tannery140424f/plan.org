@@ -1,0 +1,39 @@
+* files to look at and organise
+** From sccode_dot_org
+*** at root dir level
+
+Root path:
+
+file:/Users/iani/Documents/Dev/SuperCollider/tiny-sc-addons/sound-collections/sccode_dot_org/
+
+
+File evaluation, by list:
+
+|---+----------------------------------------+------------+---------------|
+| ! | filename                               | evaluation | type          |
+|---+----------------------------------------+------------+---------------|
+|   | all_available_inputs_mike_feedback.scd | Z NOT      |               |
+|   | another_weird_filter_distortion.scd    | L POSSIBLE |               |
+|   | collatz_scale.scd                      | Z NOT      |               |
+|   | electric_car.scd                       | L POSSIBLE | HARD NOISE    |
+|   | electricity.scd                        | M Less     | NOISE         |
+|   | fat_saw.scd                            | B YES      | pattern instr |
+|   | gravel.scd                             | B YES      | soft ambient  |
+|   | hello_sc.scd                           | B YES      | techno pop    |
+|   | industrial_bagpipe_army.scd            | L POSSIBLE | HARD NOISE    |
+|   | insects.scd                            | A YES      | soft ambient  |
+|   |                                        | A YES      | mid ambient   |
+|   |                                        |            |               |
+|   |                                        |            |               |
+|   |                                        |            |               |
+|   |                                        |            |               |
+|   |                                        |            |               |
+|   |                                        |            |               |
+|   |                                        |            |               |
+|   |                                        |            |               |
+|   |                                        |            |               |
+|   |                                        |            |               |
+|   |                                        |            |               |
+|   |                                        |            |               |
+|   |                                        |            |               |
+|---+----------------------------------------+------------+---------------|

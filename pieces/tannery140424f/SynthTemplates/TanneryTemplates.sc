@@ -7,12 +7,13 @@ This class only serves to load all .scd files that are in the same folder.
 
 */
 
-SCCodeTemplates {
+TanneryTemplates {
 
 	*initClass {
 		StartUp add: { 
 			(PathName(this.filenameSymbol.asString) +/+ "*.scd")
 			.pathMatch do: _.load;
+			[this, thisMethod.name].postln;
 		}
 	}
 

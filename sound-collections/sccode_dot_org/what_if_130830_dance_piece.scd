@@ -7,7 +7,9 @@ http://sccode.org/1-4Up
 Copied: Sun, Apr 13 2014, 23:57 EEST
 */
 
-( // 'random' sequences of rhythms, reverb,...
+ // 'random' sequences of rhythms, reverb,...
+//:
+
 z = {
     var trig, seq;
     trig = Impulse.kr(6);
@@ -55,7 +57,7 @@ z = {
 	* Decay.kr(trig, Demand.kr(trig,0,Drand([1,2,4,6], inf)*0.1)) // envelope
 	;
 };
-
+//:
 {
 	GVerb.ar(
 		in: EnvGen.kr(Env.linen(20, 240, 40, 0.6, \sine)) * z * 0.9,

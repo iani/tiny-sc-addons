@@ -8,7 +8,6 @@ Copied: Mon, Apr 14 2014, 00:30 EEST
 */
 //:
 
-(
 { var arr, x, c, y, p, n, ff, fx, fy, pp, ppv, ppb, ppbv, d, dd, ddarr, ddarrs, ddd, dddd, clar, cl, cn, cy, cs, fl, z1, z2, mx, v, out;
 
 	arr = [60,74,65,64,62,67,69,65,64,62].scramble.midicps;
@@ -41,10 +40,5 @@ Copied: Mon, Apr 14 2014, 00:30 EEST
 	cl = Stepper.kr(CoinGate.kr(0.7,x),0,0,cn-1);
 	cy = Select.kr(cl, clar);
 	cs = RLPF.ar(WhiteNoise.ar(cy)*0.7, SinOsc.kr(0.1, 0, 500, 1500), 0.3, 0.5);
-
-
 	mx = Limiter.ar(Mix.ar([v, ppv*0.7, ddd*0.7, cs*0.5]));
-
-
-
 }.play
