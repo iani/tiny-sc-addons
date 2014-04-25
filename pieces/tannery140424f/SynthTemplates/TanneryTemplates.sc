@@ -11,8 +11,8 @@ TanneryTemplates {
 
 	*initClass {
 		StartUp add: { 
-			(PathName(this.filenameSymbol.asString) +/+ "*.scd")
-			.pathMatch do: _.load;
+			(PathName(this.filenameSymbol.asString).pathOnly +/+ "*.scd")
+			.pathMatch do: { | p | p.load};
 			[this, thisMethod.name].postln;
 		}
 	}
