@@ -27,8 +27,20 @@ File evaluation, by list:
 
 ** opening: bird
 
-*** file: gardellino.scd
+*** gardellino.scd
 
-file:/Users/iani/Documents/Dev/SuperCollider/tiny-sc-addons/pieces/tannery140424f/playfiles/gardellino.scd
+file:/Users/iani/Documents/Dev/SuperCollider/tiny-sc-addons/pieces/tannery140424f/plas/gardellino.scd
+
+*** cicada2
+
+*** ocean
+
+*** mysterymetal
+
+*** boombah.scd
 
 ** part 2: patterns
+
+*** riffwithpauses
+
+*** bourree

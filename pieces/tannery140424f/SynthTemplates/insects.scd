@@ -64,14 +64,18 @@ SynthDef("cicada", { |
 	pole4 = 10000
 	bpfl = 7500
 	bpfr = 5500
+	val1l = 0.5 val1r = 128 val2l = 8 val2r = 6 val3l = 30 val3r = 3
+	recip = 40
+	sinfreq = 500
+	samplemul = 4000
 	|
 	var sig, trig, seq, freq, mul, vals;
 	
 	trig = Impulse.kr(trigrate);
 	vals = [
-		[0.5, 128],
-		[8,6],
-		[30,3]
+		[val1l, val1r],
+		[val2l, val2r],
+		[val3l, val3r]
 	];
 	freq = TChoose.kr(trig, vals);
 	
@@ -86,9 +90,9 @@ SynthDef("cicada", { |
 	sig = sig * 5;
 
 		
-	sig = BPF.ar(sig, [bpfl, bpfr], 40.reciprocal).sum * SinOsc.ar(500);
+	sig = BPF.ar(sig, [bpfl, bpfr], recip.reciprocal).sum * SinOsc.ar(sinfreq);
 	sig = sig * (1 / (SinOsc.ar( freq[0], 0, freq[1] ).squared + 1));
-	sig = (sig - OnePole.ar(sig, exp(-2pi * (4000 * SampleDur.ir)))) * 4.dup;
+	sig = (sig - OnePole.ar(sig, exp(-2pi * (samplemul * SampleDur.ir)))) * 4.dup;
 	sig.ladsrOut
 })
 

@@ -1,13 +1,13 @@
 
 
 //:
-`\basshighend => \funnyStuff;
+`\bassfoundation => \funnyStuff;
 
 //:
 { 60.rrand(90).midicps }.pfunc => [0.1, 0.1, 0.2].pseq *> \freq;
 
 //:
-`\bassfoundation => \funnyStuff;
+`\basshighend => \funnyStuff;
 
 //:
 `\werkitd => \funnyStuff;
