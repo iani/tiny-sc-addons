@@ -25,6 +25,8 @@ File evaluation, by list:
 
 * piece outline
 
+** prelude: rain?
+
 ** opening: bird
 
 *** gardellino.scd
@@ -33,14 +35,29 @@ file:/Users/iani/Documents/Dev/SuperCollider/tiny-sc-addons/pieces/tannery140424
 
 *** cicada2
 
-*** ocean
+*** NOT! -ocean-
+
+** Middle part?
 
 *** mysterymetal
 
 *** boombah.scd
 
-** part 2: patterns
+** part 3: patterns
 
 *** riffwithpauses
 
 *** bourree
+
+* final plan
+
+1. gardellino
+2. cricket2
+3. cricket1
+4. mysterymetals
+5. boombah
+6. rainthunder
+7. bourree
+8. riffwithpauses
+9. funnystuff
+10. finale - free

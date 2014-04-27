@@ -9,7 +9,7 @@ SynthDef("mysterymetals", {
 			Sweep.ar(x=Pulse.ar(\spulse.kr(4s))), x, Sweep.ar(x)
 		),
 		mul: 2
-	).adsrOut 
+	).ladsrOut 
 }),
 SynthDef("boombah", {
 	var a, f;

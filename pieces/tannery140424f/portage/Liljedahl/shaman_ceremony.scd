@@ -6,7 +6,7 @@ http://sccode.org/1-l
 
 Copied: Mon, Apr 14 2014, 12:34 EEST
 */
-play{
+{
     p=LFPulse;
     n=LFNoise1;
     Limiter.ar(
@@ -21,4 +21,4 @@ play{
             {|i|Ringz.ar(LPF.ar(Impulse.ar(6,n.kr(1,0.08)),4000),6*i+40+n.kr(30,2),0.5,n.kr(3).range(4,8)).tanh}.dup(3),0.5
         ).madd(0.3)
     )
-}
+} => \lil1235;

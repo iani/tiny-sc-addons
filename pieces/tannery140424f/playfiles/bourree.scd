@@ -1,16 +1,22 @@
 
 //: Start a named pattern reference in a SynthTree
-Edef(\simple, (degree: [1, 2, 3].pseq)) => \wander;
+Edef(\simple, (degree: [1, 2, 3].pseq, amp: 0.3)) => \wander;
 
 //: Change the named pattern Edef.  (Edef(\simple) =< ... also possible)
 \simple =< (degree: Pbrown(-5, 5, 3, inf));
 //: Modify some more
-\simple =< (dur: 0.125, amp: 0.1);
+\simple =< (degree: Pbrown(-5, 5, 3, inf), dur: (1, 0.99 ..0.125).pseq1);
+//:
+\simple =< (dur: 0.125, amp: 0.3);
+
+//:
+\simple =< (dur: [0.125, 0.125, 0.125, 0.25, 0.25, 1, 0.5, 0.5].prand, amp: 0.3);
+
 //: And more
-\simple =< (instrument: [\bassfoundation, \sine].prand);
+\simple =< (instrument: [\bassfoundation, \organdonor].prand);
 
 //: Many keys in event OK
-\simple =< (legato: { 0.4 exprand: 1.5 }.pfunc, amp: [Pn(0.05, 3), 0.1, 0.03, 0.03].pseq);
+\simple =< (legato: { 0.4 exprand: 1.5 }.pfunc, amp: [Pn(0.1, 3), 0.1, 0.05, 0.05].pseq);
 
 //: Modify how the synthtree interprets the stream
 (degree:{if(~degree%3==0){~degree+(0..2)*[2,3].choose}{~degree}})%>\wander;
@@ -22,7 +28,7 @@ Edef(\simple, (degree: [1, 2, 3].pseq)) => \wander;
 (degree: { 20 + ~degree }, ratio: 0.5) %> \other;
 
 //: Like it? Lets have more:
-(degree: { (17, 19 .. 23) + ~degree }) %> \other;
+(degree: { (10, 19 .. 32) + ~degree }) %> \other;
 
 //: Hm, up there a little louder:
 (amp: { Pbrown(0.5, 2, 0.1, inf).asStream * (~amp ? 0.01) }) %> \other;
@@ -37,6 +43,8 @@ Edef(\simple) =< (degree: (-10..10).pyramid(5).pseq);
 //: OK
 Edef(\simple) =< (degree: (10..-10).pyramid(5).pseq);
 
+//:
+Edef(\simple) =< (degree: [1, 2].pseq);
 //: Pauses? Suddenly a whiff of baroque.
 (
 (amp: [0, 0, 0.1, 0.2, 0.05].pseq, degree: { ~degree }) %> \wander;

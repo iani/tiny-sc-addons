@@ -5,18 +5,18 @@
 2 => ~steppermax;
 5 => ~stepperstep;
 
-10 => ~ratelo;
-100 => ~ratehi;
+10 => ~lo;
+100 => ~hi;
 
 40 => ~sweep;
 60 => ~sweep2;
 30 => ~lo;
 50 => ~hi;
-0.14 => ~form1;
-1/89 => ~form2;
+0.01 => ~form1;
+1/99 => ~form2;
 //: patterns!
 (stepper: (0.1, 0.2..5).pseq, dur: 1) *> \gardellino;
-
+//:
 (stepper: (0.1, 0.2..5).pseq, lo: Pwhite(10, 100, inf), dur: 1) *> \gardellino
 
 //:

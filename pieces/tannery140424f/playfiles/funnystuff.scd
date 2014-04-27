@@ -33,9 +33,10 @@
 
 //:
 
-(dur: [0.1 pn: 15, 0.05 pn: 30, 0.01 pn: 100].prand,
-freq: (1..13).pseq * 100,
+(dur: [0.4 pn: 15, 0.6 pn: 30, 1.2 pn: 10].pseq,
+freq: [(20..1).pseq1 * 50, (1..20).pseq1 * 50].pseq,
 amp: [0.01, 0.01, 0.2, 0.03].pseq) *> \funnyStuff;
 
 
-
+//:
+\funnyStuff fadeOut: 5;
