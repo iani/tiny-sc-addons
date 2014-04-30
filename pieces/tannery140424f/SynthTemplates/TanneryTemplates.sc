@@ -13,7 +13,7 @@ TanneryTemplates {
 		StartUp add: { 
 			(PathName(this.filenameSymbol.asString).pathOnly +/+ "*.scd")
 			.pathMatch do: { | p | p.load};
-			[this, thisMethod.name].postln;
+			//			[this, thisMethod.name].postln;
 		}
 	}
 
