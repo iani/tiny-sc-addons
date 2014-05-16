@@ -1,3 +1,7 @@
+/* 
+Optional part 2 - for playing with Dominic.
+(From tannery piece, bourree.scd)
+*/
 
 //: Start a named pattern reference in a SynthTree
 Edef(\simple, (degree: [1, 2, 3].pseq, amp: 0.3)) => \wander;
@@ -60,5 +64,4 @@ Edef(\simple) =< (degree: [1, 2].pseq);
 //: Fade out
 \wander.fadeOut(5);
 \other.fadeOut(10);
-#+END_EXAMPLE
 

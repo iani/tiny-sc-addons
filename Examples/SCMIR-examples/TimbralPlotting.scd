@@ -161,9 +161,5 @@ w = Window("Scatter",Rect(250,250,1200,800)).front;
 w.view.background_(Color.black);
 plot.(w,~data.buf,~data.frames,~data.segments,~data.beatdata);
 
-//: 
-
-//-might need to call this periodiocally
+//: -might need to call this periodically
 Buffer.freeAll
-
-//:
