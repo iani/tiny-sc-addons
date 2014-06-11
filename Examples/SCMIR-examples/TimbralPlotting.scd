@@ -14,7 +14,7 @@ Added: Tue, Apr  8 2014, 11:18 EEST
 
 //: -simple granular synth[substitute Impulse for GaussTrig if you don't have GaussTrig]
 
-SynthDef(\grains,{|out,buf,pos,dur=0.5,rate=500,offset=1,gate=1,pch=1,amp=1|
+SynthDef(\grains, { | out buf pos dur = 0.5 rate = 500 offset = 1 gate = 1 pch = 1 amp = 1 |
 	var son,trig;
 	trig = GaussTrig.ar(rate,offset);
 	son = TGrains.ar(2,trig,buf,pch,pos,dur)*LagUD.kr(amp,1,3);
