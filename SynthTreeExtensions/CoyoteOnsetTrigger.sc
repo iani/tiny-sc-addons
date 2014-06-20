@@ -1,14 +1,12 @@
 
 + Symbol {
-	coyote { | in = 1 fastMul = 0.5 thresh = 0.2 |
-		var st, message, inputChannelNumber;
+	coyote { | fastMul = 0.5 thresh = 0.2 |
+		var st, message, inputChannelNumber, oscFunc;
 		message = format("/%", this).asSymbol;
-		// message.postln;
 		inputChannelNumber = SynthTree.server.options.numOutputBusChannels + 1;
-		// inputChannelNumber.postln;
 		st = this.asSynthTree;
-		{
-			var input = In.ar(\myinput.kr(inputChannelNumber)); // in reserved for ar
+		{                    // in reserved for ar
+			var input = In.ar(\myinput.kr(inputChannelNumber)); 
 			var detect = Coyote.kr(
 				input,
 				// Tweak the following controls to calibrate tracking sensitivity
@@ -20,12 +18,17 @@
 			PinkNoise.ar(Decay.kr(detect)); // use this as audible feedback for control purposes
 			// turn SynthTree amp down when not needed. 
 		} => st;
-		Registry('Detectors', this, {
+		oscFunc = Registry('Detectors', this, {
 			"making osc func".postln;
 			OSCFunc({
 				// "trigger received".postln;
 				st.changed(message);
 			}, message /* '/onset' */);
+		});
+		// also clean up OSCFunc when SynthTree closes:
+		st.onObjectClosed(st, {
+			oscFunc.free;
+			oscFunc.objectClosed; // removes from registry and frees notifications;
 		});
 		{ st.set(\amp, 0) }.defer(0.1); // TODO check this!
 		//		^st; // return the symbol, for chaining to onsetAction.
