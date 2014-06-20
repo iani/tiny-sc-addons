@@ -5,7 +5,7 @@
 		message = format("/%", this).asSymbol;
 		message.postln;
 		st = {
-			var input = SoundIn.ar(\in.kr(in));
+			var input = SoundIn.ar(\input.kr(in)); // cannot use in for knobs
 			var detect = Coyote.kr(
 				input,
 				// Tweak the following controls to calibrate tracking sensitivity
