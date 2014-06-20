@@ -1,11 +1,11 @@
 
 + Symbol {
-	coyote { | fastMul = 0.5 thresh = 0.2 |
+	coyote { | in = 1 fastMul = 0.5 thresh = 0.2 |
 		var st, message;
 		message = format("/%", this).asSymbol;
 		message.postln;
 		st = {
-			var input = SoundIn.ar(1);
+			var input = SoundIn.ar(\in.kr(in));
 			var detect = Coyote.kr(
 				input,
 				// Tweak the following controls to calibrate tracking sensitivity
@@ -23,7 +23,7 @@
 			}, message /* '/onset' */);
 		});
 		{ st.set(\amp, 0) }.defer(0.1); // TODO check this!
-		^st;
+		//		^st; // return the symbol, for chaining to onsetAction.
 	}
 
 	onsetAction { | action |
