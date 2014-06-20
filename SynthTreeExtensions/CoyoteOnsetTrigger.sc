@@ -4,7 +4,7 @@
 		var st, message, inputChannelNumber;
 		message = format("/%", this).asSymbol;
 		// message.postln;
-		inputChannelNumber = SynthTree.server.options.numOutputBusChannels + 1;
+		inputChannelNumber = SynthTree.server.options.numOutputBusChannels + 1 + in;
 		// inputChannelNumber.postln;
 		st = this.asSynthTree;
 		{
