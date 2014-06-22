@@ -5,6 +5,7 @@
 		message = format("/%", this).asSymbol;
 		inputChannelNumber = SynthTree.server.options.numOutputBusChannels + 1;
 		st = this.asSynthTree;
+		st.set(\amp, 0);
 		{                    // in reserved for ar
 			var input = In.ar(\myinput.kr(inputChannelNumber)); 
 			var detect = Coyote.kr(
@@ -30,7 +31,7 @@
 			oscFunc.free;
 			oscFunc.objectClosed; // removes from registry and frees notifications;
 		});
-		{ st.set(\amp, 0) }.defer(0.1); // TODO check this!
+		//		{ st.set(\amp, 0) }.defer(0.1); // TODO check this!
 		//		^st; // return the symbol, for chaining to onsetAction.
 	}
 
