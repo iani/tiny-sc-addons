@@ -4,13 +4,13 @@
 
 Server.killAll;
 
-
-
-
+Server.default.serverRunning;
 
 `\bassfoundation => \test;
 
 500 +>.freq \test;
+
+5 +>.amp \test;
 
 { SinOsc.ar(5).range(400, 500) } +>.freq \test;
 
