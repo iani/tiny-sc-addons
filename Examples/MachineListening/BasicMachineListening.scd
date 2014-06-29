@@ -1,8 +1,12 @@
+Server.killAll;
 
 BufferList.loadBuffer("/Users/iani/Music/sounds/1306TipsyCity/Y13M06D17/tipsy.WAV");
 
 //:
 `\tipsy +> \sound;
+//:
+1 +>.amp 
+
 //:
 \tipsy.b;
 //:
@@ -26,6 +30,18 @@ Server.default.scope;
 	source;
 } => \listenAmp;
 
+//:
+{
+	var source, amplitude, wet;
+	source = \buf.playBuf(\tipsy.b);
+	amplitude = Amplitude.kr(source);
+	Out.kr(0, amplitude);
+	wet = \wet.kr(0);
+	[1 - wet * source, wet * WhiteNoise.ar(amplitude)];
+} => \listenAmp;
+//:
+0.5 +>.wet \listenAmp;
+1 +>.wet \listenAmp;
 
 //:
 {
@@ -37,6 +53,13 @@ Server.default.scope;
 } => \consetsTest;
 
 //:
+0.
+
+0.1 +>.thresh \onsetsTest;
+0.01 +>.thresh \onsetsTest;
+0.2 +>.thresh \onsetsTest;
+
+//:
 {
 	var source, onsets;
 	source = \buf.playBuf(\tipsy.b);
@@ -46,8 +69,8 @@ Server.default.scope;
 } => \consets;
 //:
 
-2 +>.fastMul \consets;
-0.02 +>.thresh \consets;
+3 +>.fastMul \consets;
+0.04 +>.thresh \consets;
 
 //: Pitch
 /*
@@ -119,9 +142,9 @@ downSample: 1, clar: 0)
 1 +>.fxamp \magAbove;
 0.1 +>.thresh \magAbove;
 //:
-{ Line.kr(0, 1, 10) } +>.thresh \magAbove;
+{ Line.kr(0, 2, 10) } +>.thresh \magAbove;
 //:
-{ Line.kr(1, 0, 10) } +>.thresh \magAbove;
+{ Line.kr(2, 0, 10) } +>.thresh \magAbove;
 
 
 //:
@@ -142,3 +165,6 @@ downSample: 1, clar: 0)
 { XLine.kr(3, 0.001, 30) } +>.thresh \magBelow;
 //:
 { XLine.kr(0.001, 3, 30) } +>.thresh \magBelow;
+
+3 +>.thresh \magBelow;
+
