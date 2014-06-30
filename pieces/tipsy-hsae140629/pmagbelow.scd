@@ -1,112 +1,19 @@
-/*
-Performance for Performigrations project kick-off meeting at P. Pepoli 20141516.
-Server.killAll;
-Fri, May 16 2014, 04:52 CEST
-*/
-//: Sound check: Stereo
-{ WhiteNoise.ar(LFPulse.kr(0.3, [0, 0.5], 0.5, 0.05 )) }.play;
-
-// Redo using BufferList
-//:  This one is added to startup.scd for the preparation of the piece
-// BufferList.loadBuffer("/Users/iani/Music/sounds/1306TipsyCity/Y13M06D17/tipsy.WAV");
-//:
-//: Creating 4x magabove + 4x magbelow stereo players
-var st;
-(1..4) do: 
-{ | i |
-	st = format("below%", i).asSymbol;
-    `\bufmagbelows =|> st;
-	st.buf(\tipsy);
-	st.buf(\tipsy).set(\amp, 0);
-	st.knobs;
-};
-///// //: Creating 4x magabove + 4x magbelow stereo players
-(1..4) do: 
-{ | i |
-	st = format("above%", i).asSymbol;
-    `\bufmagaboves =|> st;
-	st.buf(\tipsy).set(\amp, 0);
-	st.knobs;
-};
-
-//: ====================== START ====================
-var st;
-(1..4) do: 
-{ | i |
-	format("below%", i).asSymbol.start;
-	format("above%", i).asSymbol.start;
-};
-\above4.set(\amp, 0.5);
-\above4.knobs;
-
-//: ================
-//: Creating 4x magabove + 4x magbelow stereo players
-var st;
-(1..4) do: 
-{ | i |
-	format("below%", i).asSymbol.fadeOut(10);
-	format("above%", i).asSymbol.fadeOut(10);
-};
-
-//: ================================================================
-// PATTERN PART
-// ================================================================
-
-Edef(\pabove1, (instrument: \bufmagaboves, buf: \tipsy.b, 
-	startPos: (0..6000).pseq, legato: 1.2, dur: 0.5,
-	amp: 9)) => \pabove1;
-//:
-\pabove1 =< (pos: (-0.9, -0.8 .. 0.9).pseq);
-//:
-\pabove1 =< (rate: [1, 1.2, 0.8, 2].prand);
-//:
-\pabove1 =< (dur: [0.25, 0.5].pseq);
-//:
-\pabove1 =< (pos: [-0.25, 0.5].pseq);
-//: 
-\pabove1 =< (dur: [0.3 pn: 10, 0.1 pn: 8, 1, 0.05 pn: 16].prand);
-//:
-\pabove1 =< (rate: [0.5, 1, 1.2, 0.8, 0.9, 1.4, 1.5, 1.7, 2].prand);
-//:
-\pabove1 =< (dur: 5);
-//:
-\pabove1 =< (dur: 0.1);
-//:
-\pabove1 =< (legato: 0.1);
-//:
-\pabove1 =< (legato: 0.5);
-//:
-\pabove1 =< (legato: [0.5, 0.1, 0.1, 0.01, 2].prand);
-//:
-\pabove1 =< (dur: 0.1);
-//:
-\pabove1 =< (amp: 1);
-//:
-\pabove1 =< (amp: [1, 0, 0, 0, 0, 0].prand);
-//:
-\pabove1 =< (amp: [1, 0, 0.1, 0.2, 0.4, 0.2, 0, 0].prand);
-//:
-\pabove1 =< (amp: [1, 0, 0.1, 0.2, 0.4, 0.2, 0, 0].pseq);
-//:
-\pabove1 =< (magabove: 1);
-//:
-\pabove1 =< (magabove: 0.5);
-//:
-\pabove1 =< (magabove: 0.1);
-//:
-\pabove1 =< (magabove: [0.1, 0.5, 1].prand);
-//:
-\pabove1 =< (magabove: [0.1, 0.5, 1].pseq);
-
-\pabove1 =< (magabove: [0.01, 0.05, 0.1, 0.2, 0.5, 1].prand)
-
 //: ================================================================
 
 Edef(\pbelow1, (instrument: \bufmagbelows, buf: \tipsy.b, 
-	startPos: (0..3550).prand, legato: 1.2, dur: 0.5,
+	startPos: (0..3).prand, legato: 1.1, dur: 0.5,
 	amp: 1)) => \pbelow1;
 //:
+
+\pbelow1 =< (startPos: (3..50).prand);
+//:
+\pbelow1 =< (startPos: (0..3550).prand);
+//:
 \pbelow1 =< (rate: (0.05, 0.1 .. 3).pseq);
+//:
+\pbelow1 =< (rate: (0.05, 0.1 .. 3).pseq);
+//:
+\pbelow1 =< (rate: (0.05, 0.1 .. 3).prand);
 //:
 \pbelow1 =< (pos: (-0.9, -0.8 .. 0.9).pseq);
 //:
@@ -120,7 +27,7 @@ Edef(\pbelow1, (instrument: \bufmagbelows, buf: \tipsy.b,
 //:
 \pbelow1 =< (rate: [0.5, 1, 1.2, 0.8, 0.9, 1.4, 1.5, 1.7, 2].prand);
 //:
-\pbelow1 =< (dur: 5);
+\pbelow1 =< (dur: 15);
 //:
 \pbelow1 =< (dur: 0.15);
 
@@ -150,8 +57,9 @@ Edef(\pbelow1, (instrument: \bufmagbelows, buf: \tipsy.b,
 
 //: FADEOUT
 //:
-\pabove1.fadeOut(9);
 \pbelow1.fadeOut(9);
+
+
 
 
 
