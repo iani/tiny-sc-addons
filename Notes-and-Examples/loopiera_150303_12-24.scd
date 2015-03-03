@@ -20,7 +20,7 @@
 
 ~sounds2 = ~soundPaths2 collect: { | folder |
 	(folder +/+ "*.wav").pathMatch collect: { | p |
-	Buffer.read(Server.default, p)
+		Buffer.read(Server.default, p)
 	}
 };
 
@@ -70,7 +70,7 @@ PathName(~sounds2.first.first.path).folderName;
 
 //:
 
-//: Play all sounds at hi in a first series
+//: Play all sounds of all three library branches
 
 
 {
@@ -100,29 +100,29 @@ PathName(~sounds2.first.first.path).folderName;
 
 //: Make this a function
 ~looper1 = {
-{
-	Library.at(\hi) do: { | buffer |
-		buffer.play;
-		[0.2, 0.4].choose.wait;
-	}
-	
-}.fork;
+	{
+		Library.at(\hi) do: { | buffer |
+			buffer.play;
+			[0.2, 0.4].choose.wait;
+		}
+		
+	}.fork;
 
-{
-	Library.at(\mid) do: { | buffer |
-		buffer.play;
-		[0.2, 0.4].choose.wait;
-	}
-	
-}.fork;
+	{
+		Library.at(\mid) do: { | buffer |
+			buffer.play;
+			[0.2, 0.4].choose.wait;
+		}
+		
+	}.fork;
 
-{
-	Library.at(\lo) do: { | buffer |
-		buffer.play;
-		[0.2, 0.4].choose.wait;
-	}
-	
-}.fork;
+	{
+		Library.at(\lo) do: { | buffer |
+			buffer.play;
+			[0.2, 0.4].choose.wait;
+		}
+		
+	}.fork;
 };
 
 
@@ -139,13 +139,14 @@ PathName(~sounds2.first.first.path).folderName;
 	} 
 	
 }.fork;
+
 //: First GUI
 ~loopaGroup = { | group |
 	{
-	Library.at(group) do: { | buffer |
-		buffer.play;
-		[0.2, 0.4].choose.wait;
-	}
+		Library.at(group) do: { | buffer |
+			buffer.play;
+			[0.2, 0.4].choose.wait;
+		}
 	}.fork;
 };
 
@@ -155,8 +156,3 @@ PathName(~sounds2.first.first.path).folderName;
 	Button().states_([["mid"]]).action_({ ~loopaGroup.(\mid)}),
 	Button().states_([["lo"]]).action_({ ~loopaGroup.(\lo)})
 );
-
-
-
-
-
