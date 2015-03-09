@@ -76,8 +76,9 @@ SynthDef("sillyChoir", { arg
 	Out.ar(0, snd * env * amp);
 }).add;
 )
-
+//:
 (
+
 Pmono(
 	"sillyChoir",
   \note, Pwrand([0, 2, 4, 5, 7, 9], [5, 2, 3, 3, 4, 1].normalizeSum, inf),

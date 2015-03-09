@@ -22,3 +22,32 @@ Ndef(\birdy, {arg freq=1500, amp=0.5, rate=10;
 	son * amp
 }).play
 )
+
+Ndef('birdy').set(\freq, 2000)
+
+Ndef('birdy').set(\rate, 20)
+
+//:
+{arg amp=0.5;
+	var osc, son, convIn, rand;
+	var freq, rate;
+	rate = \rate.kr;
+	osc=LFCub;
+	rand = LFNoise1.ar(rate);
+	convIn=LinCongN.ar(rate);
+	son = osc.ar(Convolution.ar(convIn,convIn));
+	freq = Latch.kr(rand.range(0,1).round(0.1), rand) * \freq.kr;
+	freq = osc.ar(osc.ar(rand)*rand.range(0,10)).range(freq, freq*3);
+	son = Formlet.ar(son, freq, convIn.abs*0.1, rand.abs);
+	son = Normalizer.ar(son, 0.9, 0.1) * convIn.abs * LFPulse.kr(LFPulse.kr(rand.abs), 0, rand.abs);
+	son = son + GVerb.ar(son, 99, 2, mul: rand.range(0,0.3));
+	son * amp
+} => \bird;
+//:
+\bird.st.synth.set(\freq, 100);
+
+\bird.st.set(\freq, 50)
+
+\bird.st.set(\rate, 1);
+
+SynthTree.faders;

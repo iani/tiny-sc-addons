@@ -18,10 +18,12 @@ Copied: Sun, Apr 13 2014, 23:05 EEST
 //There seemd to be some tonality in the numbers when used as MIDI-notenumbers
 //To find that out you can count the occurrences of all the numbers wrapped between 0 en 11
 Server.default.boot;
+//:
 (
 SynthDef(\beep, { |freq=440, cutoff=1000, pan=0|
 	Out.ar(0, (Pan2.ar(LPF.ar(VarSaw.ar(freq, width: 0.01), cutoff), pan))*0.4 )}).send(s);
 )
+//:
 (
 var highest=1,  longest=1, starthighest=1, startlongest=1;
 var numberbeep, highestbeep, longestbeep;
@@ -70,6 +72,7 @@ Routine({
 }).play;
 )
 
+//:
 (
 /*This shows the Collatz-scale: The fourth step, which coincidentally is a C, is dominant and the 10th, F# follows. There is quite some A, B flat, C#, E and G and very little E flat. A flat, B, D, and F are almost absent. So I guess the Collatz scale is: C, C#, E, F#, G, A, B flat, C and you can use E flat as some kind of Blue note or something.*/
 
@@ -80,5 +83,6 @@ for(0, 12, {arg i;   //show as list
 	}
 	);
 )
+//:
 numberbeep.set(\freq, (32+(0%96)).midicps); 
 {VarSaw.ar(440, [0.1, 1], 0.05, 1, 0)}.scope

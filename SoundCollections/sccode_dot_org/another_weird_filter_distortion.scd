@@ -46,6 +46,8 @@ SynthDef(\distort_filt, { |outbus, amp = 0.5, amt = 0.5, rate = 10, sig_thresh =
 }, [0, 0.1, 0.1, 0.1, 0.1, 0]).add;
 )
 
+//:
+
 (
 Pproto({
   ~dist = (type: \on, \amt: 0, instrument: \distort_filt, addAction: \addToTail).yield;

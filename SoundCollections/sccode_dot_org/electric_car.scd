@@ -9,7 +9,10 @@ Copied: Sun, Apr 13 2014, 17:19 EEST
 */
 
 //load the Synth
-s.options.numWireBufs = 1024; s.reboot;
+//:
+Server.default.options.numWireBufs = 1024;
+Server.default.reboot;
+//:
 (
 k = ControlSpec(5, -128, \lin);
 e = ControlSpec(0.01, 0.5, \exp);
@@ -39,18 +42,22 @@ SynthDef(\Motorklang, {arg speed=0.0, time=0.0, rpm=0.0, t_tr=1;
 				});
 			});
 		Out.ar(0, Mix.new(sig) ! 2);
-	}).load(s);
+	}).add;
 )
 
+//:
 //Test it
 (
 x = Synth(\Motorklang);
 x.set(\speed, 40, \rpm, 3000, \time, 0, \t_tr, 1);
 )
+
+//:
 x.free
 
 //A simple interface to check the sound limits of the engine
 
+//:
 (
 x = Synth.newPaused(\Motorklang);
 w = Window.new("Motor", Rect(150, 266, 950, 300)).front;
