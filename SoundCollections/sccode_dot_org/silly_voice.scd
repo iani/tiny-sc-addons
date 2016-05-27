@@ -7,6 +7,7 @@ http://sccode.org/1-4Vq
 
 Copied: Sun, Apr 13 2014, 21:49 EEST
 */
+//:
 (
 // SynthDef
 SynthDef("sillyChoir", { arg
@@ -18,7 +19,7 @@ SynthDef("sillyChoir", { arg
 	att = 0.01,
 	rel = 0.1,
 	lag = 1,
-	gate = 1;
+	gate = 1;b
 
 	var in, vibrato, env, va, ve, vi, vo, vu, snd, temp_freq, temp_lag, temp_vowel;
 
