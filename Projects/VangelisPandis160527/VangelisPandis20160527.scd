@@ -28,7 +28,6 @@
 ~player = {
 	loop {
 		~wind.set (\freq, 400 exprand: 2000);
-
 		0.1.wait;
 	}
 }.fork;

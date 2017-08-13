@@ -12,41 +12,60 @@ Sat, May 31 2014, 12:48 EEST
 The source can be:
 */
 
+
 //: 1.1. A function:
-{ WhiteNoise.ar(0.1) } => \sound1;
+(
+{ WhiteNoise.ar(0.1) }.play;
+)
 //: 1.2. A reference to the name of a template holding a SynthDef
+(
 `\lpfsawr => \sound1;
+)
 //: 1.3. An event (plays like a pattern):
+(
 (degree: Pseq([0, 2, 4, 7], inf), dur: 0.1) => \sound1;
-
+)
 //: 2. To stop a named sound (SynthTree), send it the message fadeOut.
+(
 \sound1.fadeOut(0.05);
-
+)
 //: 3. To restart a sound, send it the message start
+(
 \sound1.start;
-
+)
 //: 4. To change a parameter of the sound, use the 'set' message
+(
 // New sound to test:
 { Formant.ar(\fundfreq.kr(440), \formfreq.kr(1760), 880) } => \sound1;
 
+)
 //: Changing the formant frequency
+(
 \sound1.set(\formfreq, 200);
+)
 //: Again
+(
 \sound1.set(\formfreq, 2000);
+)
 //: Change the fundamental frequeny
+(
 \sound1.set(\fundfreq, 220);
+)
 //: Change the fundamental frequeny
+(
 \sound1.set(\fundfreq, 2200);
-
+)
 //: Note: Open a fader interface for all SynthTrees:
+(
 SynthTree.faders;
-
 /*
 5. If the playing sound is a pattern, you can add or ovewrite exisitng
 key-pattern pairs on the fly with the operator
 */
 
+)
 //: 5.1 Chuck a new key-pattern array to the sound
+(
 //  The patterns included in the array replace the ones with the
 //  same name in the SynthTree, or are added to it.
 (dur: Prand([0.01, 0.2], inf), amp: Pseq([0.01, 0.1], inf)) => \sound1;
@@ -69,13 +88,9 @@ key-pattern pairs on the fly with the operator
 
 The environment variable ~fadeTime stores the global default duration for fade-in and fade-out of synths.  It is stored in the parent environment of the current environment.  The =!> operator is used to set environment variables of the parent environment.  Examples:
 
-
-
-
-
-
+)
 //: Restart synths after Command-.
-
+(
 // Add some more synths to the tree:
 
 { SinOsc.ar(440) } => \la;
@@ -92,8 +107,9 @@ thisProcess.stop;
 
 SynthTree.initTree;
 
+)
 //: Clearing SynthTree status
-
+(
 // To stop all synths of the SynthTree from being restarted, evaluate this:
 
 SynthTree.stopAll;
@@ -102,36 +118,48 @@ SynthTree.stopAll;
 
 // ============== Patching Audio Synth I/O ================
 
+)
 //: Example 1:  Simple patching of one source to one effect:
-
+(
 //: Start an effects synth with a low-pass filter
 { LPF.ar(Inp.ar, \freq.kr(2000)) } => \lpf;
+)
 //: Start a WhiteNoise synth
+(
 { WhiteNoise.ar } => \source;
+)
 //: Send the noise synth to the filter
+(
 \lpf =< \source;
+)
 //: Change the frequency of the low pass filter
+(
 \lpf.set(\freq, 5000);
-
+)
 //: Example 2: Several synths sending to one effect.
-
+(
 { LPF.ar(Inp.ar, LFNoise0.kr(40 ! 2).range(500, 4000)) } => \lpf;
 \lpf =< ({ PinkNoise.ar } ==> \source);
 \lpf =< ({ LFPulse.ar(LFNoise0.kr(30).range(3000, 4000)) } ==> \source2);
 
+)
 //: Example 3: Changing the synths of the source and of the effect:
-
+(
 { LPF.ar(Inp.ar, \freq.kr(1000)) * Decay.kr({ Dust.kr(\trigRate.kr(1)) } ! 2) } =>.5 \lpf;
 \lpf =< ({ LFTri.ar(LFNoise2.kr(12).range(400, 4000)) } ==> \source2);
 
+)
 //: Confirm that the tree can be restarted after Command-. also when it contains linked synths:
-
+(
 thisProcess.stop; // run this to stop all synths first
+)
 //: Then run this to restart all stopped synths:
+(
 SynthTree.initTree;
+)
 //: Modify parameters of the lpf SynthTree
+(
 \lpf.set(\trigRate, 10, \freq, 2000);
-
 // ================= GUI Views =================
 /*
 ** Overview: 5 View Types                                              :test:
@@ -145,8 +173,9 @@ There are 5 main view types:
 - Process Registry View :: Experimental / Proof of concept: Shows a list of currently running synth and routine processes, in a manner similar to the process view of Mini Audicle in ChucK.  Works together with Emacs/Org-Mode (see keyboard shortcuts).  Can also work with SuperCollider IDE, but requires using different methods for playing Functions, Synths or Routines.  This feature is superseded by the Fader View, but kept here as proof-of-concept.
 */
 
+)
 //: The Synth Template View
-
+(
 SynthTemplate.gui;
 
 /* Keyboard commands on Synth Template view
@@ -165,8 +194,9 @@ SynthTemplate.gui;
 
 */
 
+)
 //: The SynhTree-Fader View
-
+(
 SynthTree.faders;
 
 /* Keyboard commands on SynthTree.faders
@@ -194,13 +224,16 @@ SynthTree.faders;
 
 */
 
+)
 //:The Knobs view
+(
 // Creating Views for any parameter
-
 { SinOsc.ar(\freq.kr(440)) } => \viewtest;
 \viewtest.view(\freq).view(\amp);
 
+)
 //: Setting fadeTime in individual synths
+(
 // Start an "effect" synth with an input
 { LPF.ar(In.ar(\in.kr(0)), \freq.kr(4000)) } => \lpf;
 // Set fadeTime of effect:
@@ -282,10 +315,13 @@ Following keyboard shortcuts allow one to choose a synthtree from the list of sy
 The chuck commands (=H-c c=, =H-c H-c=) enclose the snippet or section into a function before chucking.  Try for example =H-c c= placing the cursor in the following line of code in sclang-mode:
 */
 
+)
 //:
+(
 SinOsc.ar(\freq.kr(800) * LFNoise0.kr(12).range(0.8, 1.2));
+)
 //:
-
+(
 // Stop the example above by typing =H-c H-space=.
 /*
 Following keyboard shortcuts select a buffer from the list of buffers currently loaded in SuperCollider, or operate on the buffer list:
@@ -442,7 +478,9 @@ loop {
 :eval-id:  3
 :END:
 */
+)
 //:
+(
 var synths, fwalk, swalk, synth;
 synths = List();
 fwalk = (Pbrown(30, 90, 0.75, inf) + Pfunc({ 0.01.exprand(1.5)})).asStream;
@@ -488,7 +526,9 @@ loop {
 Use =|> to set the source of a SynthTree without starting it.  This is necessary in cases like the following, where the starting of the synth is done explicitly by trig in a routine:
 */
 
+)
 //:
+(
 {
 	var synth;
 	synth = { [SinOsc, LFPulse, LFTri, LFSaw].choose.ar(\freq.kr(400)) } =|> \test;
@@ -497,11 +537,13 @@ Use =|> to set the source of a SynthTree without starting it.  This is necessary
 		0.1.wait;
 	}
 }.fork
+)
 //:
-
+(
 // ======== UGen shortcuts ======
 
 // =Inp.ar=
 
 { Inp.ar * Decay2.kr({ Dust.kr(1) } ! 2, 0.5, 2) } => \smooth;
 \smooth =< ({ GrayNoise.ar(3) } ==> \gray);
+)
